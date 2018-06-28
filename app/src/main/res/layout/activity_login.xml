@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
+                    android:text="foo@gmail.com"
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="hello"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in_short"

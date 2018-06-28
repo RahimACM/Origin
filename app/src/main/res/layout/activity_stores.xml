@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".HomeActivity"
-    tools:showIn="@layout/app_bar_home">
+    tools:context=".StoresActivity" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,9 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                card_view:cardBackgroundColor="#AFAFAF"
-                card_view:cardCornerRadius="4dp"
-                card_view:cardElevation="0.5in">
+                card_view:cardBackgroundColor="#FFF"
+                card_view:cardCornerRadius="15dp"
+                card_view:cardElevation="0.1in">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -47,11 +45,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nom du magasin : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Orange" />
@@ -66,11 +66,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nom du vendeur : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hocine Boudjendel" />
@@ -85,11 +87,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Numéro de téléphone : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+213 558 175 644" />
@@ -119,9 +123,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                card_view:cardBackgroundColor="#AFAFAF"
-                card_view:cardCornerRadius="4dp"
-                card_view:cardElevation="0.5in">
+                card_view:cardBackgroundColor="#FFF"
+                card_view:cardCornerRadius="15dp"
+                card_view:cardElevation="0.1in">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -142,11 +146,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nom du magasin : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Orange" />
@@ -161,11 +167,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nom du vendeur : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hocine Boudjendel" />
@@ -180,11 +188,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Numéro de téléphone : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+213 558 175 644" />
@@ -214,9 +224,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                card_view:cardBackgroundColor="#AFAFAF"
-                card_view:cardCornerRadius="4dp"
-                card_view:cardElevation="0.5in">
+                card_view:cardBackgroundColor="#FFF"
+                card_view:cardCornerRadius="15dp"
+                card_view:cardElevation="0.1in">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -237,11 +247,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nom du magasin : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Orange" />
@@ -256,11 +268,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nom du vendeur : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hocine Boudjendel" />
@@ -275,11 +289,13 @@
                         android:padding="6dp">
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Numéro de téléphone : " />
 
                         <TextView
+                            android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+213 558 175 644" />
@@ -305,4 +321,17 @@
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <Button
+        android:id="@+id/scan_qr_code_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@color/colorAccent"
+        android:text="Scan QR code"
+        android:layout_alignParentBottom="true"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+</RelativeLayout>

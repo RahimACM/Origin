@@ -28,4 +28,21 @@
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/address_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Server address : "
+        android:layout_below="@+id/scan_qr_code_button"
+        />
+
+    <EditText
+        android:id="@+id/address_edit_text"
+        android:layout_below="@+id/scan_qr_code_button"
+        android:layout_toRightOf="@+id/address_text_view"
+        android:text="http://b3f44438.ngrok.io"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
 </RelativeLayout>

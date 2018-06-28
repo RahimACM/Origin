@@ -1,6 +1,7 @@
 package dz.origin.origin;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,12 +25,24 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.web3j.crypto.Credentials;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.utils.Convert;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.util.logging.Logger;
+
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String scanResult = "";
     final Activity homeActivity = this;
+    private String scanResult = "";
+    static MainContract mainContract;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +50,19 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Web3j web3j = Web3j.build(new HttpService("http://b3f44438.ngrok.io"));
+        Credentials credentials = Credentials.create("7e232b9b5b5f64da32f796483b4590bf4fd8a0643e5c7f96f957913282de3f77");;
+        try {
+            mainContract = MainContract.deploy(
+                    web3j, credentials,
+                    new BigInteger("20000000000"),
+                    BigInteger.valueOf(6721975)).send();
+//            mainContract.
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
 
+        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +106,20 @@ public class HomeActivity extends AppCompatActivity
                 integrator.initiateScan();
             }
         });
+
+//        View scan_qr_code_item = (View) findViewById(R.id.nav_scan_qr_code);
+//        scan_qr_code_item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            }
+//        });
+//
+//        View stores_item = (View) findViewById(R.id.nav_stores);
+//        stores_item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            }
+//        });
     }
 
     @Override
@@ -90,8 +130,17 @@ public class HomeActivity extends AppCompatActivity
                 Toast.makeText(this,"Scanning aborted",Toast.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 scanResult = result.getContents();
+                try {
+                    Toast.makeText(this, "here", Toast.LENGTH_LONG).show();
+                    String produceName = getProductName(Integer.getInteger(scanResult));
+                    Toast.makeText(this, produceName, Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "here1", Toast.LENGTH_LONG).show();
+
+                    e.printStackTrace();
+                }
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -136,9 +185,16 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_scan_qr_code) {
-            // Handle the camera action
+                IntentIntegrator integrator = new IntentIntegrator(homeActivity);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setPrompt("Scan Card");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(false);
+                integrator.setBarcodeImageEnabled(false);
+                integrator.initiateScan();
         } else if (id == R.id.nav_stores) {
-
+                Intent storesIntent = new Intent(HomeActivity.this, StoresActivity.class);
+                startActivity(storesIntent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_about) {
@@ -148,5 +204,28 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public String getProductName(int id) throws Exception {
+        Toast.makeText(this, "ffff", Toast.LENGTH_LONG).show();
+        /*---------------------------------------*/
+        EditText edt = (EditText) findViewById(R.id.address_edit_text);
+        Toast.makeText(this, edt.getText().toString(), Toast.LENGTH_LONG).show();
+
+        Web3j web3j = Web3j.build(new HttpService(edt.getText().toString()));
+
+        Credentials credentials = Credentials.create("7e232b9b5b5f64da32f796483b4590bf4fd8a0643e5c7f96f957913282de3f77");;
+        try {
+            mainContract = MainContract.deploy(
+                    web3j, credentials,
+                    new BigInteger("20000000000"),
+                    BigInteger.valueOf(6721975)).send();
+//            mainContract.
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*---------------------------------------*/
+
+        return mainContract.getProduct(BigInteger.valueOf(id)).send().getValue1();
     }
 }
