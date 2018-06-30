@@ -23,4 +23,6 @@
     <string name="action_settings">Settings</string>
 
     <string name="title_activity_stores">Magasins</string>
+    <string name="title_activity_product">Produit</string>
+
 </resources>

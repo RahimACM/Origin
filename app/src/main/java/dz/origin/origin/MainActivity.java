@@ -32,28 +32,6 @@ import rx.functions.Action0;
 public class MainActivity extends AppCompatActivity {
 
     private final int splashTime = 2000;
-    public void test() throws Exception {
-
-        Web3j web3j = Web3j.build(new HttpService(
-                "http://192..0.0.1:7000"));
-        String version = web3j.web3ClientVersion().send().getWeb3ClientVersion();
-        System.out.println("Version : "+version);
-        Credentials credentials = Credentials.create("7e232b9b5b5f64da32f796483b4590bf4fd8a0643e5c7f96f957913282de3f77");;
-        System.out.println(credentials.getAddress());
-        System.out.println("Sending 1 Wei ("
-                + Convert.fromWei("1", Convert.Unit.ETHER).toPlainString() + " Ether)");
-        MainContract contract = MainContract.deploy(
-                web3j, credentials,
-                new BigInteger("20000000000"),
-                BigInteger.valueOf(6721975)).send();
-        contract.logNewUserEventObservable(new EthFilter()).doOnCompleted(new Action0() {
-            @Override
-            public void call() {
-                System.out.println(this.toString());
-            }
-        });
-//        TransactionReceipt t = contract.insertUser("","","", BigInteger.valueOf(20));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -50,19 +51,7 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Web3j web3j = Web3j.build(new HttpService("http://b3f44438.ngrok.io"));
-        Credentials credentials = Credentials.create("7e232b9b5b5f64da32f796483b4590bf4fd8a0643e5c7f96f957913282de3f77");;
-        try {
-            mainContract = MainContract.deploy(
-                    web3j, credentials,
-                    new BigInteger("20000000000"),
-                    BigInteger.valueOf(6721975)).send();
-//            mainContract.
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
-            e.printStackTrace();
 
-        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,20 +95,20 @@ public class HomeActivity extends AppCompatActivity
                 integrator.initiateScan();
             }
         });
-
-//        View scan_qr_code_item = (View) findViewById(R.id.nav_scan_qr_code);
-//        scan_qr_code_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            }
-//        });
+        // in here we are trying to connect to the server
+//        Web3j web3j = Web3j.build(new HttpService("http://b3f44438.ngrok.io"));
+//        Credentials credentials = Credentials.create("7e232b9b5b5f64da32f796483b4590bf4fd8a0643e5c7f96f957913282de3f77");;
+//        try {
+//            mainContract = MainContract.deploy(
+//                    web3j, credentials,
+//                    new BigInteger("20000000000"),
+//                    BigInteger.valueOf(6721975)).send();
+////            mainContract.
+//        } catch (Exception e) {
+//            Toast.makeText(this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
+//            e.printStackTrace();
 //
-//        View stores_item = (View) findViewById(R.id.nav_stores);
-//        stores_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            }
-//        });
+//        }
     }
 
     @Override
@@ -131,16 +120,30 @@ public class HomeActivity extends AppCompatActivity
             }
             else {
                 scanResult = result.getContents();
-                try {
-                    Toast.makeText(this, "here", Toast.LENGTH_LONG).show();
-                    String produceName = getProductName(Integer.getInteger(scanResult));
-                    Toast.makeText(this, produceName, Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(this, "here1", Toast.LENGTH_LONG).show();
+//                try {
+//                    EditText edt = (EditText) findViewById(R.id.address_edit_text);
+//                    Web3j web3j = Web3j.build(new HttpService(edt.getText().toString()));
+//                    Credentials credentials = Credentials.create("7e232b9b5b5f64da32f796483b4590bf4fd8a0643e5c7f96f957913282de3f77");;
+//                    try {
+//                        mainContract = MainContract.deploy(
+//                                web3j, credentials,
+//                                new BigInteger("20000000000"),
+//                                BigInteger.valueOf(6721975)).send();
+//                        mainContract.
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                } catch (Exception e) {
+//                    Toast.makeText(this, "here1", Toast.LENGTH_LONG).show();
+//
+//                    e.printStackTrace();
+//                }
 
-                    e.printStackTrace();
+                if(scanResult.equals("1")){
+                    Intent productIntent = new Intent(HomeActivity.this, ProductActivity.class);
+                    startActivity(productIntent);
                 }
-
+                else    Toast.makeText(this, "Un produit non reconaissant ou non fiable!", Toast.LENGTH_LONG).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -204,28 +207,5 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public String getProductName(int id) throws Exception {
-        Toast.makeText(this, "ffff", Toast.LENGTH_LONG).show();
-        /*---------------------------------------*/
-        EditText edt = (EditText) findViewById(R.id.address_edit_text);
-        Toast.makeText(this, edt.getText().toString(), Toast.LENGTH_LONG).show();
-
-        Web3j web3j = Web3j.build(new HttpService(edt.getText().toString()));
-
-        Credentials credentials = Credentials.create("7e232b9b5b5f64da32f796483b4590bf4fd8a0643e5c7f96f957913282de3f77");;
-        try {
-            mainContract = MainContract.deploy(
-                    web3j, credentials,
-                    new BigInteger("20000000000"),
-                    BigInteger.valueOf(6721975)).send();
-//            mainContract.
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /*---------------------------------------*/
-
-        return mainContract.getProduct(BigInteger.valueOf(id)).send().getValue1();
     }
 }
